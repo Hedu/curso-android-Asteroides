@@ -1,5 +1,7 @@
 package org.example.asteroides;
 
+import org.example.asteroides.ServicioMusica;
+
 import android.app.Activity;
 import android.app.Fragment.SavedState;
 import android.content.Intent;
@@ -15,7 +17,6 @@ import android.widget.Toast;
 public class Asteroides extends Activity implements OnClickListener{
 
 	 public static AlmacenPuntuaciones almacen = new AlmacenPuntuacionesArray();
-	 MediaPlayer mp;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class Asteroides extends Activity implements OnClickListener{
 
         bjugar.setOnClickListener(this);
         Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
-        mp =  MediaPlayer.create(this, R.raw.audio);
-        mp.start();
+        startService(new Intent(this,
+                ServicioMusica.class));
 	}
 
 	@Override
@@ -108,7 +109,6 @@ public class Asteroides extends Activity implements OnClickListener{
 		   super.onResume();
 
 		   Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-		   mp.start();
 
 		}
 
@@ -129,7 +129,6 @@ public class Asteroides extends Activity implements OnClickListener{
 
 		   super.onStop();
 		   Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
-		   mp.stop();
 		}
 
 		 
@@ -147,24 +146,9 @@ public class Asteroides extends Activity implements OnClickListener{
 
 			super.onDestroy();
 		   Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
+		   stopService(new Intent(this,
+                   ServicioMusica.class));
 		}
 		
-		@Override
-		protected void onSaveInstanceState(Bundle outState) {
-			// TODO Auto-generated method stub
-			super.onSaveInstanceState(outState);
-			if (mp != null){
-				int pos=mp.getCurrentPosition();
-				outState.putInt("currentPos", pos);
-			}
-		}
 		
-		@Override
-		protected void onRestoreInstanceState(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
-			super.onRestoreInstanceState(savedInstanceState);
-			if (savedInstanceState != null && mp != null){
-				mp.seekTo(savedInstanceState.getInt("currentPos"));
-			}
-		}
 }
