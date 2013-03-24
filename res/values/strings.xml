@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Asteroides</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="app_title">Asteroides</string>
+    <string name="play">Jugar</string>
+    <string name="settings">Configurar</string>
+    <string name="about">Acerca de</string>
+    <string name="exit">Salir</string>
+    <string name="mensajeAcercaDe">Esta es una aplicación creada como ejemplo para el curso de Android de la web miriadax</string>
+    <string name="scores">Puntuaciones</string>
+
+</resources>
