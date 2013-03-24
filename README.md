@@ -1,4 +1,4 @@
 Asteroides
 ==========
 
-Aplicación android del curso de miriadax.
+Repositorio de la aplicación android del curso de miriadax.
