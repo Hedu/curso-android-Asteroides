@@ -40,7 +40,21 @@ public class Asteroides extends Activity implements OnClickListener{
 
 	public void lanzarJuego(View view){
 		Intent intent = new Intent(this, Juego.class);
-		startActivity(intent);
+		 startActivityForResult(intent, 1234);
+	}
+	
+	@Override
+	protected void onActivityResult (int requestCode,int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode==1234 && resultCode==RESULT_OK && data!=null) {
+			int puntuacion = data.getExtras().getInt("puntuacion");
+			String nombre = "Yo";
+			// Mejor leerlo desde un Dialog o una nueva actividad                           
+			//AlertDialog.Builder
+
+			almacen.guardarPuntuacion(puntuacion, nombre,System.currentTimeMillis());
+			lanzarPuntuaciones(null);
+		}
 	}
 	
 	public void lanzarPreferencias(View view){

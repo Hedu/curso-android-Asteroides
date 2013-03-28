@@ -3,7 +3,9 @@ package org.example.asteroides;
 import java.util.List;
 import java.util.Vector;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint.Style;
@@ -14,6 +16,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,6 +58,9 @@ public class VistaJuego extends View implements SensorEventListener{
 	private float valorInicial;
     
 	SensorManager mSensorManager;
+	
+	private int puntuacion = 0;
+	private Activity padre;
 	
     public VistaJuego(Context context, AttributeSet attrs) {
           super(context, attrs);
@@ -162,6 +168,11 @@ public class VistaJuego extends View implements SensorEventListener{
 		             }
 		       }
 		}
+		for (Grafico asteroide : Asteroides) {
+			if (asteroide.verificaColision(nave)) {
+			       salir();
+			}
+		}
 	}
 	
 	class ThreadJuego extends Thread {
@@ -247,8 +258,11 @@ public class VistaJuego extends View implements SensorEventListener{
     private void destruyeAsteroide(int i) {
         Asteroides.remove(i);
         misilActivo = false;
-
- }
+        puntuacion += 1000;
+        if (Asteroides.isEmpty()) {
+            salir();
+        }
+    }
 
  private void ActivaMisil() {
         misil.setPosX(nave.getPosX()+ nave.getAncho()/2-misil.getAncho()/2);
@@ -283,4 +297,18 @@ public class VistaJuego extends View implements SensorEventListener{
                 SensorManager.SENSOR_DELAY_GAME);
 
 	}
+	
+	public void setPadre(Activity padre) {
+		this.padre = padre;
+	}
+	
+	private void salir() {
+		Bundle bundle = new Bundle();
+		bundle.putInt("puntuacion", puntuacion);
+		Intent intent = new Intent();
+		intent.putExtras(bundle);
+		padre.setResult(Activity.RESULT_OK, intent);
+		padre.finish();
+	}
+	 
 }
