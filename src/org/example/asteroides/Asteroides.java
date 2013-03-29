@@ -28,6 +28,8 @@ public class Asteroides extends Activity implements OnClickListener{
         Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
         startService(new Intent(this,
                 ServicioMusica.class));
+        //almacen = new AlmacenPuntuacionesPreferencias(this);
+        almacen = new AlmacenPuntuacionesFicheroInterno(this);
 	}
 
 	@Override
