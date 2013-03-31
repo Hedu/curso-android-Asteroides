@@ -4,9 +4,12 @@ import org.example.asteroides.ServicioMusica;
 
 import android.app.Activity;
 import android.app.Fragment.SavedState;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +31,21 @@ public class Asteroides extends Activity implements OnClickListener{
         Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
         startService(new Intent(this,
                 ServicioMusica.class));
-        //almacen = new AlmacenPuntuacionesPreferencias(this);
-        almacen = new AlmacenPuntuacionesFicheroInterno(this);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Asteroides.this);
+        switch (Integer.valueOf(sp.getString("puntuaciones", "7"))){
+        case 0:
+        	almacen = new AlmacenPuntuacionesArray();
+        	break;
+        case 1:
+        	almacen = new AlmacenPuntuacionesPreferencias(this);
+        	break;
+        case 2:
+            almacen = new AlmacenPuntuacionesFicheroInterno(this);
+        	break;
+    	default:
+        	almacen = new AlmacenPuntuacionesArray();
+    		break;
+        }
 	}
 
 	@Override

@@ -37,5 +37,12 @@
     android:summary="En cuantos trozos se divide un asteroide"
 
     android:defaultValue="3"/>
+  <ListPreference 
+      android:key="puntuaciones" 
+      android:title="Persistencia puntuaciones" 
+      android:summary="Se escoge el sistema de persistencia de las puntuaciones" 
+      android:entries="@array/tiposPuntuaciones" 
+      android:entryValues="@array/tiposPuntuacionesValores"
+      android:defaultValue="0"/>
 
 </PreferenceScreen>

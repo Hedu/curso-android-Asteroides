@@ -11,6 +11,8 @@ public final class R {
     public static final class array {
         public static final int tiposGraficos=0x7f060000;
         public static final int tiposGraficosValores=0x7f060001;
+        public static final int tiposPuntuaciones=0x7f060002;
+        public static final int tiposPuntuacionesValores=0x7f060003;
     }
     public static final class attr {
     }
