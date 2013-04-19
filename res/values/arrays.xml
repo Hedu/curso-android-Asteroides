@@ -26,6 +26,8 @@
   <item>Preferencias</item>
 
   <item>Fichero Interno</item>
+  
+  <item>Fichero Externo</item>
 
 </string-array>
 
@@ -36,6 +38,8 @@
   <item>1</item>
 
   <item>2</item>
+  
+  <item>3</item>
 
 </string-array>
 

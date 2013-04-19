@@ -42,6 +42,9 @@ public class Asteroides extends Activity implements OnClickListener{
         case 2:
             almacen = new AlmacenPuntuacionesFicheroInterno(this);
         	break;
+        case 3:
+            almacen = new AlmacenPuntuacionesFicheroExterno(this);
+        	break;
     	default:
         	almacen = new AlmacenPuntuacionesArray();
     		break;
